@@ -1,0 +1,179 @@
+/* app.wxss - 全局样式，常青藤主题（绿色主调） */
+
+/* 颜色变量定义（通过 class 复用） */
+page {
+  --ivy-primary: #2E8B57;
+  --ivy-primary-light: #3CB371;
+  --ivy-primary-dark: #1F6E42;
+  --ivy-accent: #66CDAA;
+  --ivy-bg: #F5F7F6;
+  --ivy-card: #FFFFFF;
+  --ivy-text: #2C3E2D;
+  --ivy-text-light: #7A8A7C;
+  --ivy-text-muted: #B8C5BC;
+  --ivy-border: #E8EDE9;
+  --ivy-warning: #E67E22;
+  --ivy-danger: #E74C3C;
+  --ivy-shadow: 0 8rpx 24rpx rgba(46, 139, 87, 0.10);
+  --ivy-shadow-sm: 0 4rpx 12rpx rgba(46, 139, 87, 0.06);
+
+  background-color: #F5F7F6;
+  color: #2C3E2D;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* 通用容器 */
+.container {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 卡片样式 */
+.card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: var(--ivy-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:active {
+  transform: scale(0.985);
+  box-shadow: var(--ivy-shadow-sm);
+}
+
+/* 主按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #3CB371, #2E8B57);
+  color: #FFFFFF;
+  border-radius: 48rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8rpx 20rpx rgba(46, 139, 87, 0.25);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-primary::after { border: none; }
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 4rpx 12rpx rgba(46, 139, 87, 0.2);
+}
+
+.btn-primary[disabled] {
+  background: #B8D8C4;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+/* 次级按钮 */
+.btn-outline {
+  background: #FFFFFF;
+  color: #2E8B57;
+  border: 2rpx solid #2E8B57;
+  border-radius: 48rpx;
+  height: 84rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  transition: transform 0.12s ease;
+}
+
+.btn-outline::after { border: none; }
+
+.btn-outline:active { transform: scale(0.97); }
+
+/* 标题 */
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+/* 副标题 */
+.sub-title {
+  font-size: 26rpx;
+  color: #7A8A7C;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  background: #E8F5EC;
+  color: #2E8B57;
+  margin-right: 12rpx;
+  font-weight: 500;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #E8EDE9;
+  margin: 24rpx 0;
+}
+
+/* 文本省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* flex 工具类 */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 80rpx 0;
+  color: #B8C5BC;
+  font-size: 28rpx;
+}
+
+/* 通用底部提示 */
+.tip-bottom {
+  text-align: center;
+  font-size: 22rpx;
+  color: #B8C5BC;
+  margin-top: 24rpx;
+}

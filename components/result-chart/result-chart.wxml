@@ -1,0 +1,67 @@
+<!-- components/result-chart/result-chart.wxml -->
+<view class="chart-wrap" wx:if="{{chart}}">
+  <view class="chart-title">{{chart.title}}</view>
+
+  <!-- 加载中提示 -->
+  <view class="chart-loading" wx:if="{{!chartLoaded}}">
+    <text class="loading-dot">载入中...</text>
+  </view>
+
+  <!-- 柱状图 -->
+  <block wx:if="{{chart.type === 'bar' && chartLoaded}}">
+    <view class="bar-item" wx:for="{{barData}}" wx:key="label" wx:for-item="item">
+      <view class="bar-label ellipsis">{{item.label}}</view>
+      <view class="bar-track">
+        <view class="bar-fill" style="width:{{showBarAnim ? item.percent : 0}}%; background:{{item.color || '#2E8B57'}}"></view>
+      </view>
+      <view class="bar-value">{{item.value}}</view>
+    </view>
+  </block>
+
+  <!-- 雷达图 -->
+  <block wx:elif="{{chart.type === 'radar' && chartLoaded}}">
+    <canvas type="2d" id="radarCanvas" class="radar-canvas"></canvas>
+  </block>
+
+  <!-- 仪表盘 -->
+  <block wx:elif="{{chart.type === 'gauge' && chartLoaded}}">
+    <view class="gauge-box">
+      <view class="gauge-semi">
+        <view class="gauge-arc-bg"></view>
+        <view class="gauge-arc-fill" style="transform: rotate({{chart.value * 1.8 - 90}}deg)"></view>
+      </view>
+      <view class="gauge-center">
+        <view class="gauge-value">{{chart.value}}</view>
+        <view class="gauge-unit">压力指数</view>
+        <view class="gauge-level">{{chart.level}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 饼图 -->
+  <block wx:elif="{{chart.type === 'pie' && chartLoaded}}">
+    <view class="pie-container">
+      <view class="pie-main">
+        <view
+          wx:for="{{pieData}}"
+          wx:key="label"
+          class="pie-item"
+          style="flex:{{item.value}}; background:{{item.color}}"
+        >
+          <text class="pie-value" wx:if="{{item.percent > 5}}">{{item.percent}}%</text>
+        </view>
+      </view>
+      <view class="pie-legend">
+        <view
+          wx:for="{{pieData}}"
+          wx:key="label"
+          class="legend-item"
+        >
+          <view class="legend-dot" style="background:{{item.color}}"></view>
+          <text class="legend-label">{{item.label}}</text>
+          <text class="legend-value">{{item.value}}（{{item.percent}}%）</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

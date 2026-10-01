@@ -1,0 +1,26 @@
+<!-- components/skeleton/skeleton.wxml - 加载骨架屏（内容区块占位动画） -->
+<view class="sk-wrap" style="padding:{{skPadding}};">
+  <slot name="header" wx:if="{{showHeader}}">
+    <view class="sk-row sk-header">
+      <view class="sk-block sk-block-avatar"></view>
+      <view class="sk-blocks">
+        <view class="sk-block sk-block-title"></view>
+        <view class="sk-block sk-block-sub"></view>
+      </view>
+    </view>
+  </slot>
+
+  <slot name="body" wx:if="{{showBody}}">
+    <view class="sk-row sk-body" wx:for="{{bodyCount}}" wx:key="_idx">
+      <view class="sk-block sk-block-title" wx:if="{{item.layout === 'title'}}"></view>
+      <view class="sk-block sk-block-line" wx:elif="{{item.layout === 'line'}}" style="width:{{item.width || '80%'}};"></view>
+      <view class="sk-block sk-block-para" wx:else></view>
+    </view>
+  </slot>
+
+  <slot name="grid" wx:if="{{showGrid}}">
+    <view class="sk-grid" style="grid-template-columns: repeat({{gridCols || 2}}, 1fr);">
+      <view class="sk-block sk-block-grid" wx:for="{{gridCount}}" wx:key="_idx"></view>
+    </view>
+  </slot>
+</view>

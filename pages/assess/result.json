@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "测评报告",
+  "usingComponents": {
+    "result-chart": "/components/result-chart/result-chart"
+  }
+}

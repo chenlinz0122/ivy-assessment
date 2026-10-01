@@ -1,0 +1,9 @@
+{
+  "name": "get-user-info",
+  "version": "1.0.0",
+  "description": "按 openid 查询云数据库用户信息，用于登录态恢复",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

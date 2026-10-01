@@ -1,0 +1,16 @@
+# 微信开发者工具个人配置（含本地路径等隐私信息）
+project.private.config.json
+
+# 云函数实际配置（含 AppSecret 等密钥）
+cloudfunctions/update-session-with-login/config.js
+
+# 依赖
+node_modules/
+
+# 归档与文档（体积大，不需要版本管理）
+_archive/
+docs/
+
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,80 @@
+<!-- pages/checkin/calendar.wxml - 学习打卡日历页 -->
+<view class="calendar-page">
+
+  <!-- 顶部统计卡片 -->
+  <view class="stats-hero">
+    <view class="hero-deco"></view>
+    <view class="hero-row">
+      <view class="hero-item">
+        <view class="hero-num">{{continuousDays}}</view>
+        <view class="hero-label">连续打卡</view>
+      </view>
+      <view class="hero-divider"></view>
+      <view class="hero-item">
+        <view class="hero-num">{{totalDays}}</view>
+        <view class="hero-label">累计天数</view>
+      </view>
+      <view class="hero-divider"></view>
+      <view class="hero-item">
+        <view class="hero-num">{{todayChecked ? '✓' : '○'}}</view>
+        <view class="hero-label">今日状态</view>
+      </view>
+    </view>
+    <view class="hero-tip" wx:if="{{!todayChecked}}">今天还没打卡哦，快去坚持吧~</view>
+    <view class="hero-tip done" wx:else>今日已打卡，继续保持！💪</view>
+  </view>
+
+  <!-- 日历卡片 -->
+  <view class="cal-card">
+    <view class="cal-header">
+      <view class="cal-arrow" bindtap="prevMonth">‹</view>
+      <view class="cal-title">{{monthText}}</view>
+      <view class="cal-arrow" bindtap="nextMonth">›</view>
+    </view>
+
+    <!-- 星期表头 -->
+    <view class="cal-weekdays">
+      <view class="wd" wx:for="{{weekDays}}" wx:key="*this">{{item}}</view>
+    </view>
+
+    <!-- 日期网格 -->
+    <view class="cal-grid">
+      <block wx:for="{{days}}" wx:key="index">
+        <view wx:if="{{item.empty}}" class="cal-cell empty"></view>
+        <view wx:else
+              class="cal-cell {{item.checked ? 'checked' : ''}} {{item.isToday ? 'today' : ''}} {{item.isFuture ? 'future' : ''}}"
+              data-date="{{item.dateStr}}"
+              data-checked="{{item.checked}}"
+              data-future="{{item.isFuture}}"
+              bindtap="onDayTap">
+          <view class="cell-day">{{item.day}}</view>
+          <view class="cell-dot" wx:if="{{item.checked}}"></view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 图例 -->
+    <view class="cal-legend">
+      <view class="legend-item"><view class="legend-dot checked"></view><text>已打卡</text></view>
+      <view class="legend-item"><view class="legend-dot today"></view><text>今天</text></view>
+      <view class="legend-item"><view class="legend-dot normal"></view><text>未打卡</text></view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-bar">
+    <button class="action-btn primary" bindtap="doCheckin" disabled="{{todayChecked}}">
+      {{todayChecked ? '今日已打卡' : '立即打卡'}}
+    </button>
+    <button class="action-btn outline" bindtap="goPost">发学习打卡帖 →</button>
+  </view>
+
+  <!-- 打卡说明 -->
+  <view class="tips-card">
+    <view class="tips-title">📖 打卡说明</view>
+    <view class="tips-line">· 每天最多打卡1次，不可补打</view>
+    <view class="tips-line">· 连续打卡7天可解锁「坚持者」徽章</view>
+    <view class="tips-line">· 打卡记录保存在本地，可随时查看</view>
+  </view>
+
+</view>

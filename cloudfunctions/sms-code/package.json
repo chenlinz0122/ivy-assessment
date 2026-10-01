@@ -1,0 +1,9 @@
+{
+  "name": "sms-code",
+  "version": "1.0.0",
+  "description": "短信验证码发送/校验（验证码登录）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,147 @@
+<!-- pages/community/index.wxml - 社区广场（报告广场：混合信息流） -->
+<view class="community-page">
+
+  <!-- 页面标题 -->
+  <view class="page-head">
+    <view class="page-title">社区广场</view>
+    <view class="page-sub">分享报告心得，交流选科经验</view>
+  </view>
+
+  <!-- 顶部 Tab（话题讨论为独立入口，点击跳转） -->
+  <view class="tab-bar">
+    <view class="tab-item {{tab === 0 ? 'active' : ''}}" data-tab="0" bindtap="switchTab">
+      <text>报告广场</text>
+    </view>
+    <view class="tab-item" data-tab="1" bindtap="switchTab">
+      <text>话题讨论 ›</text>
+    </view>
+  </view>
+
+  <!-- 报告广场：混合信息流 -->
+  <block wx:if="{{tab === 0}}">
+
+    <!-- 筛选排序栏 -->
+    <view class="filter-bar">
+      <view class="sort-group">
+        <view class="sort-item {{sortBy === 'latest' ? 'active' : ''}}" data-sort="latest" bindtap="switchSort">最新</view>
+        <view class="sort-item {{sortBy === 'hot' ? 'active' : ''}}" data-sort="hot" bindtap="switchSort">最热</view>
+      </view>
+      <view class="type-filter" bindtap="toggleTypeFilter">
+        <text class="type-filter-name">{{filterName}}</text>
+        <text class="type-filter-arrow {{showTypeFilter ? 'up' : ''}}">▾</text>
+      </view>
+    </view>
+
+    <!-- 类型筛选下拉菜单（仅对测评报告分享类帖子生效） -->
+    <view class="type-dropdown-mask" wx:if="{{showTypeFilter}}" bindtap="toggleTypeFilter"></view>
+    <view class="type-dropdown" wx:if="{{showTypeFilter}}">
+      <view class="type-dropdown-item {{filterType === item.key ? 'active' : ''}}"
+            wx:for="{{filterOptions}}" wx:key="key"
+            data-key="{{item.key}}" bindtap="selectType">
+        <text>{{item.name}}</text>
+        <text class="check-icon" wx:if="{{filterType === item.key}}">✓</text>
+      </view>
+    </view>
+
+    <!-- 帖子列表（混合展示） -->
+    <!-- 加载骨架屏 -->
+    <skeleton wx:if="{{loading}}" show-header="{{false}}" show-body="{{true}}"
+              body-count="{{4}}" body-layouts='["line","para","line","para"]'></skeleton>
+    <view class="post-list" wx:else>
+      <view class="card post-card {{item.postType === 'topic' ? 'post-card-topic' : ''}}"
+            wx:for="{{posts}}" wx:key="_id"
+            data-id="{{item._id}}" data-type="{{item.postType}}" bindtap="openPost">
+
+        <!-- 帖子头部：用户信息 + 类型标签 -->
+        <view class="post-head">
+          <view class="post-avatar {{item.anonymous ? 'avatar-anon' : ''}}">
+            <image wx:if="{{item.avatar && !item.anonymous}}" class="avatar-img" src="{{item.avatar}}" mode="aspectFill"></image>
+            <text wx:elif="{{item.anonymous}}">🌿</text>
+            <text wx:else>👤</text>
+          </view>
+          <view class="post-author">
+            <view class="post-nick">{{item.nickName}}</view>
+            <view class="post-time">⏰ {{item.time}}</view>
+          </view>
+
+          <!-- 测评报告分享类：显示测评类型标签 -->
+          <view class="assess-tag" wx:if="{{item.postType !== 'topic' && item.assessTag}}">
+            <text class="assess-tag-icon">{{item.assessIcon}}</text>
+            <text class="assess-tag-text">{{item.assessTag}}</text>
+          </view>
+          <!-- 话题讨论类：显示话题分类标签 -->
+          <view class="cat-tag" wx:if="{{item.postType === 'topic' && item.catTag}}">{{item.catTag}}</view>
+        </view>
+
+        <!-- 帖子内容 -->
+        <view class="post-content" wx:if="{{item.postType !== 'topic'}}">{{item.content}}</view>
+        <view class="post-content" wx:else>
+          <text>{{item.contentShort}}</text>
+          <text class="post-more" wx:if="{{item.hasMore}}">全文</text>
+        </view>
+
+        <!-- 话题帖图片缩略图 -->
+        <view class="post-images" wx:if="{{item.postType === 'topic' && item.images.length}}">
+          <view class="post-img-item"
+                wx:for="{{item.images}}" wx:for-item="img" wx:key="*this"
+                data-urls="{{item.images}}" data-current="{{img}}"
+                catchtap="previewImage">
+            <image src="{{img}}" mode="aspectFill"></image>
+          </view>
+        </view>
+
+        <!-- 帖子底部：点赞 + 评论 + 话题来源标识 -->
+        <view class="post-foot">
+          <view class="foot-btn {{item.liked ? 'liked' : ''}}" data-id="{{item._id}}" catchtap="onLike">
+            <text class="foot-icon">{{item.liked ? '❤️' : '🤍'}}</text>
+            <text>{{item.likes}}</text>
+          </view>
+          <view class="foot-btn">
+            <text class="foot-icon">💬</text>
+            <text>{{item.comments}}</text>
+          </view>
+          <!-- 话题讨论类帖子右下角小字标签 -->
+          <view class="topic-source" wx:if="{{item.postType === 'topic'}}">💬 来自话题讨论</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{posts.length === 0}}">
+      <view class="empty-emoji">🗂️</view>
+      <view class="empty-text">该筛选下暂无帖子</view>
+      <view class="empty-sub">换个筛选条件，或发第一个帖子吧</view>
+    </view>
+  </block>
+
+  <!-- 发帖悬浮按钮 -->
+  <view class="fab" bindtap="openComposer" wx:if="{{tab === 0}}">✏️ 发帖</view>
+
+  <!-- 发帖弹层 -->
+  <view class="modal-mask" wx:if="{{showComposer}}" bindtap="closeComposer">
+    <view class="composer-box" catchtap="stopPropagation">
+      <view class="composer-title">发表分享</view>
+      <textarea class="composer-input"
+                placeholder="分享你的测评报告心得、选科经验或学习技巧…"
+                maxlength="300"
+                value="{{composeContent}}"
+                bindinput="onComposeInput"></textarea>
+      <view class="composer-options">
+        <view class="anon-toggle" bindtap="toggleAnonymous">
+          <view class="toggle-switch {{isAnonymous ? 'on' : ''}}">
+            <view class="toggle-knob"></view>
+          </view>
+          <text class="anon-label">匿名发布</text>
+        </view>
+        <text class="composer-count">{{composeContent.length}}/300</text>
+      </view>
+      <view class="composer-foot">
+        <view class="composer-actions">
+          <button class="btn-outline composer-btn" bindtap="closeComposer">取消</button>
+          <button class="btn-primary composer-btn" bindtap="submitPost">发布</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

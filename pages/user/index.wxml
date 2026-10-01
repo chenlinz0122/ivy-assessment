@@ -1,0 +1,142 @@
+<!-- pages/user/index.wxml - 个人中心 -->
+<view class="user-page">
+
+  <!-- 未登录：登录引导卡片 -->
+  <block wx:if="{{!isLoggedIn}}">
+    <view class="login-prompt card">
+      <view class="login-emoji">🔒</view>
+      <view class="login-tip">请登录</view>
+      <view class="login-sub">登录后查看你的测评记录、积分徽章与成长档案</view>
+      <button class="btn-primary login-go" bindtap="goLogin">立即登录</button>
+    </view>
+  </block>
+
+  <!-- 已登录 -->
+  <block wx:else>
+    <!-- 用户头部卡片 -->
+    <view class="user-header">
+      <view class="header-bg"></view>
+      <view class="header-content">
+        <view class="avatar">{{user.avatar ? '' : '👤'}}
+          <image wx:if="{{user.avatar}}" class="avatar-img" src="{{user.avatar}}" mode="aspectFill"></image>
+        </view>
+        <view class="user-info">
+          <view class="nick">{{user.nickName}}</view>
+          <view class="user-tags">
+            <text class="tag">{{user.grade}}</text>
+            <text class="tag combo">选科：{{user.subjectCombo || '未设置'}}</text>
+          </view>
+        </view>
+        <view class="edit-btn" bindtap="openEdit">✏️</view>
+      </view>
+    </view>
+
+    <!-- 统计行 -->
+    <view class="card stats-row">
+      <view class="stat-item" bindtap="goRecords">
+        <view class="stat-num">{{recordCount}}</view>
+        <view class="stat-label">已完成测评</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goBadges">
+        <view class="stat-num">{{user.points || 0}}</view>
+        <view class="stat-label">累计积分</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goBadges">
+        <view class="stat-num level-icon">{{level.icon}}</view>
+        <view class="stat-label">{{level.name}}</view>
+      </view>
+    </view>
+
+    <!-- 快捷入口 -->
+    <view class="section-title">快捷入口</view>
+    <view class="card menu-list">
+      <view class="menu-item" bindtap="goRecords">
+        <view class="menu-icon-wrap bg-blue">📋</view>
+        <text class="menu-text">我的测评记录</text>
+        <text class="menu-badge" wx:if="{{recordCount > 0}}">{{recordCount}}</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goBadges">
+        <view class="menu-icon-wrap bg-gold">🏅</view>
+        <text class="menu-text">积分与徽章</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item menu-item-new" bindtap="goArchive">
+        <view class="menu-icon-wrap bg-green">📈</view>
+        <text class="menu-text">我的成长档案</text>
+        <text class="menu-tag-new">NEW</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goCheckin">
+        <view class="menu-icon-wrap bg-green">📅</view>
+        <text class="menu-text">学习打卡日历</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="inviteFriend">
+        <view class="menu-icon-wrap bg-orange">💌</view>
+        <text class="menu-text">邀请同学</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goPrivacy">
+        <view class="menu-icon-wrap bg-blue">🛡️</view>
+        <text class="menu-text">隐私保护指引</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="aboutUs">
+        <view class="menu-icon-wrap bg-purple">💡</view>
+        <text class="menu-text">关于我们</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 退出登录 / 注销账号 -->
+    <view class="logout-wrap">
+      <button class="btn-outline logout-btn" bindtap="logout">退出登录</button>
+      <button class="btn-outline logout-btn danger-btn" bindtap="deleteAccount">注销账号（删除全部数据）</button>
+    </view>
+  </block>
+
+  <!-- 编辑资料弹层 -->
+  <view class="modal-mask" wx:if="{{showEdit}}" bindtap="closeEdit">
+    <view class="modal-box" catchtap="stopPropagation">
+      <view class="modal-title">编辑资料</view>
+
+      <view class="form-group">
+        <text class="form-label">头像</text>
+        <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onEditChooseAvatar">
+          <image class="avatar-img" src="{{editForm.previewAvatar || user.avatarUrl || user.avatar}}" mode="aspectFill"></image>
+        </button>
+        <text class="form-tip">点击选择微信头像或从相册选（微信已不自动提供真实头像）</text>
+      </view>
+
+      <view class="form-group">
+        <text class="form-label">昵称</text>
+        <input class="form-input" type="nickname" maxlength="20" placeholder="点击可选用微信昵称，或手动输入"
+               value="{{editForm.nickName}}" bindinput="onNickInput" />
+      </view>
+
+      <view class="form-group">
+        <text class="form-label">年级</text>
+        <picker range="{{gradeOptions}}" value="{{editForm.gradeIndex}}" bindchange="onGradeChange">
+          <view class="form-picker">
+            {{gradeOptions[editForm.gradeIndex]}}<text class="picker-arrow"> ▾</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <text class="form-label">选科组合</text>
+        <input class="form-input" type="text" maxlength="20" placeholder="如：物理+化学+生物"
+               value="{{editForm.subjectCombo}}" bindinput="onSubjectInput" />
+      </view>
+
+      <view class="modal-actions">
+        <button class="btn-outline modal-btn" bindtap="closeEdit">取消</button>
+        <button class="btn-primary modal-btn" bindtap="saveProfile">保存</button>
+      </view>
+    </view>
+  </view>
+
+</view>

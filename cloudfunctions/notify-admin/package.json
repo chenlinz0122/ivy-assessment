@@ -1,0 +1,9 @@
+{
+  "name": "notify-admin",
+  "version": "1.0.0",
+  "description": "登录关键事件写入管理员通知",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

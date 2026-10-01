@@ -1,0 +1,18 @@
+<!-- components/assessment-card/assessment-card.wxml -->
+<view class="assess-card" bindtap="onTap">
+  <view class="card-icon" style="background:linear-gradient(135deg, {{item.color || '#2E8B57'}}26, {{item.color || '#2E8B57'}}14);">
+    <text class="icon-emoji">{{item.icon}}</text>
+  </view>
+  <view class="card-body">
+    <view class="card-title">{{item.name}}</view>
+    <view class="card-desc ellipsis-2">{{item.desc}}</view>
+    <view class="card-meta">
+      <text class="meta-item"><text class="meta-icon">⏱</text> {{item.duration}}</text>
+      <text class="meta-divider">·</text>
+      <text class="meta-item"><text class="meta-icon">👥</text> {{item.participants}}人参与</text>
+    </view>
+  </view>
+  <view class="card-arrow">
+    <text class="arrow-text">›</text>
+  </view>
+</view>

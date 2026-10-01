@@ -1,0 +1,70 @@
+<!-- pages/admin/index.wxml - 管理后台（用户列表） -->
+<view class="admin-page">
+
+  <!-- 无权限 -->
+  <view wx:if="{{denied}}" class="denied-box">
+    <view class="denied-icon">🔒</view>
+    <view class="denied-title">无管理员权限</view>
+    <view class="denied-desc">请先用管理员绑定的手机号在本小程序登录一次，再重新进入本页。若仍提示无权限，请联系开发者将您的手机号加入管理员白名单。</view>
+  </view>
+
+  <block wx:else>
+    <!-- 搜索栏 -->
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索昵称 / 手机号" value="{{keyword}}"
+             bindinput="onKeywordInput" confirm-type="search" bindconfirm="onSearch" />
+      <view class="search-btn" bindtap="onSearch">搜索</view>
+    </view>
+
+    <!-- 筛选 -->
+    <scroll-view class="filter-bar" scroll-x="true" enhanced show-scrollbar="{{false}}">
+      <view class="filter-group">
+        <view wx:for="{{roleFilters}}" wx:key="key"
+              class="filter-tag {{roleFilter === item.key ? 'filter-tag-active' : ''}}"
+              data-key="{{item.key}}" bindtap="onRoleFilter">{{item.label}}</view>
+      </view>
+      <view class="filter-group">
+        <view wx:for="{{gradeFilters}}" wx:key="key"
+              class="filter-tag {{gradeFilter === item.key ? 'filter-tag-active' : ''}}"
+              data-key="{{item.key}}" bindtap="onGradeFilter">{{item.label}}</view>
+      </view>
+    </scroll-view>
+
+    <!-- 统计 + 导出 -->
+    <view class="stats-bar">
+      <text class="stats-text">共 {{total}} 人 · 当前显示 {{filtered.length}} 人</text>
+      <view class="export-btn" bindtap="exportCsv">导出 CSV</view>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:if="{{loading}}" class="loading-box">加载中...</view>
+
+    <!-- 用户列表 -->
+    <view wx:else class="user-list">
+      <view wx:if="{{filtered.length === 0}}" class="empty-box">暂无用户</view>
+      <view wx:for="{{filtered}}" wx:key="openid" class="user-card {{item.banned ? 'user-card-banned' : ''}}">
+        <image wx:if="{{item.avatarUrl}}" class="user-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="user-avatar user-avatar-default">{{item.nickName[0] || '?'}}</view>
+        <view class="user-info">
+          <view class="user-name-row">
+            <text class="user-name">{{item.nickName || '未命名'}}</text>
+            <text class="user-role {{item.role === 'parent' ? 'role-parent' : ''}}">{{item.roleText}}</text>
+            <text class="user-grade">{{item.grade || '-'}}</text>
+            <text wx:if="{{item.banned}}" class="user-banned-tag">已封禁</text>
+          </view>
+          <view class="user-phone" data-phone="{{item.phoneNumber}}" bindtap="copyPhone">
+            📱 {{item.phoneNumber || '未绑定'}}（点击复制）
+          </view>
+          <view class="user-meta">注册 {{item.createTimeText}} · 最后登录 {{item.lastLoginText}}</view>
+          <view wx:if="{{item.banned && item.banReason}}" class="user-ban-reason">封禁原因：{{item.banReason}}</view>
+        </view>
+        <!-- 管理操作 -->
+        <view class="user-actions">
+          <view wx:if="{{!item.banned}}" class="action-btn action-ban" catchtap="onBan" data-openid="{{item.openid}}" data-name="{{item.nickName}}">封禁</view>
+          <view wx:else class="action-btn action-unban" catchtap="onUnban" data-openid="{{item.openid}}" data-name="{{item.nickName}}">解封</view>
+          <view class="action-btn action-delete" catchtap="onDelete" data-openid="{{item.openid}}" data-name="{{item.nickName}}">删除</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

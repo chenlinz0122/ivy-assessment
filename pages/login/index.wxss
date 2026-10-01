@@ -1,0 +1,251 @@
+/* pages/login/index.wxss - 登录页样式 */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #E8F5EC 0%, #F5F7F6 40%);
+  padding: 60rpx 40rpx;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo-area { text-align: center; margin-bottom: 50rpx; padding-top: 40rpx; }
+.logo-icon { font-size: 100rpx; margin-bottom: 20rpx; }
+.logo-title { font-size: 44rpx; font-weight: 700; color: #1F6E42; margin-bottom: 12rpx; }
+.logo-sub { font-size: 24rpx; color: #7A8A7C; }
+
+/* 表单卡片 */
+.form-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 48rpx 40rpx;
+  box-shadow: 0 8rpx 30rpx rgba(46, 139, 87, 0.1);
+}
+.form-title { font-size: 36rpx; font-weight: 700; color: #2C3E2D; margin-bottom: 8rpx; }
+.form-sub { font-size: 24rpx; color: #8A9A8C; margin-bottom: 32rpx; }
+
+/* ===== 基本信息表单 ===== */
+.form-item { margin-bottom: 28rpx; }
+.form-label {
+  font-size: 26rpx; font-weight: 600; color: #3D4F3F;
+  margin-bottom: 14rpx;
+}
+.required-mark { color: #E53935; font-weight: 700; }
+
+/* 头像选择（chooseAvatar）—— 整行居中 */
+.avatar-item {
+  display: flex; flex-direction: column; align-items: center;
+}
+.avatar-item .form-label { margin-bottom: 16rpx; align-self: center; }
+.avatar-btn {
+  width: 128rpx; height: 128rpx;
+  min-height: 128rpx;          /* 覆盖 button 默认 min-height，防止被拉高成椭圆 */
+  max-width: 128rpx;           /* 防止被拉宽 */
+  flex-shrink: 0;              /* flex 容器内不被压缩变形 */
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;                   /* 清除 button 默认 margin */
+  background: #F0F4F1;
+  border: 2rpx dashed #B9CDBE;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  line-height: normal;
+  box-sizing: border-box;
+}
+.avatar-btn::after { border: none; }
+.avatar-img {
+  width: 126rpx; height: 126rpx;  /* 减去 2rpx 边框，圆与按钮外沿重合 */
+  border-radius: 50%;
+  display: block;
+}
+.avatar-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+.avatar-placeholder-icon { font-size: 36rpx; line-height: 1; }
+.avatar-placeholder-text { font-size: 18rpx; color: #8A9A8C; margin-top: 6rpx; }
+
+/* 输入框（min-height 保证小程序 input 文字垂直居中） */
+.form-input {
+  width: 100%; height: 88rpx; min-height: 88rpx;
+  background: #F5F7F6;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx; color: #2C3E2D;
+  box-sizing: border-box;
+}
+
+/* 身份选择 */
+.role-group { display: flex; gap: 20rpx; }
+.role-tag {
+  flex: 1; height: 80rpx;
+  display: flex; align-items: center; justify-content: center;
+  background: #F5F7F6;
+  border: 2rpx solid #E3EAE5;
+  border-radius: 16rpx;
+  font-size: 28rpx; color: #5A6B5D;
+}
+.role-tag-active {
+  background: #E8F5EC;
+  border-color: #2E8B57;
+  color: #1F6E42;
+  font-weight: 600;
+}
+
+/* 年级选择器 */
+.grade-picker {
+  height: 88rpx;
+  background: #F5F7F6;
+  border-radius: 16rpx;
+  display: flex; align-items: center;
+  padding: 0 24rpx;
+}
+.picker-value { font-size: 28rpx; color: #2C3E2D; }
+.picker-arrow { color: #8A9A8C; font-size: 22rpx; margin-left: 8rpx; }
+
+/* 分隔线 */
+.divider { height: 2rpx; background: #F0F3F1; margin: 8rpx 0 28rpx; }
+
+/* 隐私协议勾选（复选框与文字精确对齐） */
+.privacy-check {
+  display: flex; align-items: center; flex-wrap: wrap;
+  margin-bottom: 24rpx;
+  line-height: 1.5;
+}
+.privacy-text, .privacy-link { line-height: 1.5; }
+.privacy-intro { margin-bottom: 24rpx; color: #3D4F3F; }
+.checkbox {
+  width: 36rpx; height: 36rpx;
+  border: 3rpx solid #C5D1C8; border-radius: 8rpx;
+  margin-right: 12rpx;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.checkbox.checked { background: #2E8B57; border-color: #2E8B57; }
+.check-icon { color: #FFFFFF; font-size: 24rpx; font-weight: 700; }
+.privacy-text { font-size: 24rpx; color: #5A6B5D; }
+.privacy-link { font-size: 24rpx; color: #2E8B57; text-decoration: underline; }
+
+/* 主登录按钮 —— 修复截断：去掉 line-height，纯 flex */
+.login-btn {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #2E8B57, #1F6E42);
+  color: #FFFFFF !important;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: normal !important;
+  padding: 0;
+}
+.login-btn::after { border: none; }
+.login-btn[disabled] {
+  background: #B8C5BC !important;
+  color: #E8EDE9 !important;
+}
+
+/* ============ 隐私保护指引弹窗 ============ */
+.modal-mask {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999;
+}
+.modal-dialog {
+  width: 640rpx; max-height: 80vh;
+  background: #FFFFFF; border-radius: 24rpx;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.modal-title {
+  padding: 32rpx; font-size: 32rpx; font-weight: 700;
+  color: #1F6E42; text-align: center;
+  border-bottom: 2rpx solid #F0F3F1;
+  flex-shrink: 0;
+}
+.modal-body {
+  flex: 1; overflow: hidden;
+  padding: 24rpx 32rpx;
+  box-sizing: border-box;
+}
+.modal-footer {
+  display: flex; gap: 16rpx;
+  padding: 20rpx 32rpx 32rpx;
+  flex-shrink: 0;
+}
+.modal-btn {
+  flex: 1; height: 80rpx;
+  font-size: 28rpx;
+  border: none !important;
+  border-radius: 40rpx !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  line-height: normal !important;
+  background: #F5F7F6 !important; color: #5A6B5D !important;
+}
+.modal-btn::after { border: none; }
+.modal-btn-primary {
+  background: #2E8B57 !important; color: #FFFFFF !important;
+}
+
+/* 隐私弹窗正文（纯文字排版） */
+.privacy-meta {
+  font-size: 22rpx; color: #9AAB9D;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+.privacy-chapter { margin-bottom: 32rpx; }
+.privacy-h2 {
+  font-size: 28rpx; font-weight: 700; color: #2C3E2D;
+  margin-bottom: 12rpx;
+}
+.privacy-h3 {
+  font-size: 26rpx; font-weight: 600; color: #3D4F3F;
+  margin: 16rpx 0 8rpx;
+}
+.privacy-p {
+  font-size: 26rpx; color: #5A6B5D;
+  line-height: 1.9;
+}
+.privacy-list {
+  font-size: 26rpx; color: #5A6B5D;
+  line-height: 1.9;
+  margin-top: 10rpx;
+}
+
+/* ===== 登录按钮 / 手机号授权失败提示 / 暂不登录 ===== */
+.phone-login-btn { margin-top: 20rpx; }
+/* 手机号授权失败就近提示（取消授权 / 次数用尽 / code 失效等） */
+.phone-error {
+  text-align: center;
+  color: #E53935;
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+.skip-login {
+  text-align: center;
+  font-size: 26rpx;
+  color: #999;
+  padding: 24rpx;
+}
+
+/* 协议未勾选时高亮 */
+.agreed-error {
+  animation: shake 0.4s;
+}
+.privacy-error {
+  text-align: center;
+  color: #E53935;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10rpx); }
+  75% { transform: translateX(10rpx); }
+}
+/* 底部安全区适配（刘海屏/全面屏） */
+.login-page {
+  padding-bottom: env(safe-area-inset-bottom);
+}

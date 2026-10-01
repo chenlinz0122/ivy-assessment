@@ -1,0 +1,9 @@
+{
+  "name": "admin-manage-user",
+  "version": "1.0.0",
+  "description": "管理后台：封禁/解封/删除用户（openid 白名单鉴权）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

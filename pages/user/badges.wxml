@@ -1,0 +1,81 @@
+<!-- pages/user/badges.wxml -->
+<view class="badges-page">
+  <!-- 未登录 -->
+  <view class="empty" wx:if="{{!isLogin}}">
+    <view class="empty-icon">🔒</view>
+    <view>请先登录查看积分与徽章</view>
+    <button class="btn-primary login-btn" bindtap="goLogin">去登录</button>
+  </view>
+
+  <block wx:else>
+    <!-- 积分概览 -->
+    <view class="points-card">
+      <view class="points-num">{{points}}</view>
+      <view class="points-label">累计积分</view>
+      <view class="level-badge">
+        <text class="level-icon">{{level.icon}}</text>
+        <text>{{level.name}} · Lv.{{level.level}}</text>
+      </view>
+      <button class="btn-outline earn-btn" bindtap="goAssess">去测评赚积分</button>
+    </view>
+
+    <!-- 积分规则 -->
+    <view class="card">
+      <view class="section-title">积分规则</view>
+      <view class="rule-item"><text>完成一个测评</text><text class="rule-pts">+10分</text></view>
+      <view class="rule-item"><text>分享报告（每日上限3次）</text><text class="rule-pts">+5分</text></view>
+      <view class="rule-item"><text>连续7天登录</text><text class="rule-pts">+20分</text></view>
+      <view class="rule-item"><text>邀请同学注册（上限5人）</text><text class="rule-pts">+15分</text></view>
+    </view>
+
+    <!-- 徽章墙 -->
+    <view class="card">
+      <view class="section-title">徽章墙</view>
+      <view class="badge-grid">
+        <view class="badge-item {{item.unlocked ? '' : 'locked'}}" wx:for="{{badges}}" wx:key="key">
+          <view class="badge-icon">{{item.unlocked ? item.icon : '🔒'}}</view>
+          <view class="badge-name">{{item.name}}</view>
+          <view class="badge-desc">{{item.desc}}</view>
+          <view class="badge-progress">{{item.unlocked ? '已解锁' : item.progress}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 排行榜 -->
+    <view class="card">
+      <view class="section-title">积分排行榜</view>
+      <view class="board-tabs">
+        <view class="board-tab {{boardTab === 'week' ? 'active' : ''}}" data-tab="week" bindtap="switchBoard">周榜</view>
+        <view class="board-tab {{boardTab === 'month' ? 'active' : ''}}" data-tab="month" bindtap="switchBoard">月榜</view>
+        <view class="board-tab {{boardTab === 'all' ? 'active' : ''}}" data-tab="all" bindtap="switchBoard">总榜</view>
+      </view>
+      <view class="my-rank">我的排名：第 {{myRank}} 名</view>
+      <view class="rank-list">
+        <view class="rank-item {{item.isMe ? 'me' : ''}}" wx:for="{{boardList}}" wx:key="rank">
+          <view class="rank-num {{item.rank <= 3 ? 'top' : ''}}">
+            {{item.rank === 1 ? '🥇' : item.rank === 2 ? '🥈' : item.rank === 3 ? '🥉' : item.rank}}
+          </view>
+          <view class="rank-name">{{item.nickName}}{{item.isMe ? '（我）' : ''}}</view>
+          <view class="rank-pts">{{item.points}}分</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 积分明细 -->
+    <view class="card">
+      <view class="section-title">积分明细</view>
+      <view class="log-list">
+        <view class="log-item" wx:for="{{pointLogs}}" wx:key="_id">
+          <view class="log-info">
+            <view class="log-reason">{{item.reason}}</view>
+            <view class="log-time">{{item.time}}</view>
+          </view>
+          <view class="log-value {{item.value > 0 ? 'plus' : 'minus'}}">
+            {{item.value > 0 ? '+' : ''}}{{item.value}}
+          </view>
+        </view>
+        <view class="empty" wx:if="{{pointLogs.length === 0}}">暂无积分记录</view>
+      </view>
+    </view>
+  </block>
+</view>

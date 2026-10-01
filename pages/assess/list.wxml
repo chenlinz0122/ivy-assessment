@@ -1,0 +1,33 @@
+<!-- pages/assess/list.wxml -->
+<view class="list-page">
+  <!-- 页面标题 -->
+  <view class="page-head">
+    <view class="page-title">测评中心</view>
+    <view class="page-sub">科学测评，找到属于你的升学方向</view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view class="cat-bar" scroll-x>
+    <view
+      class="cat-item {{activeCat === item.key ? 'active' : ''}}"
+      wx:for="{{categories}}"
+      wx:key="key"
+      data-cat="{{item.key}}"
+      bindtap="switchCat"
+    >{{item.name}}</view>
+  </scroll-view>
+
+  <!-- 测评列表 -->
+  <view class="list-body">
+    <!-- 加载骨架屏 -->
+    <skeleton wx:if="{{loading}}" show-header="{{true}}" show-body="{{false}}"
+              show-grid="{{true}}" grid-cols="{{2}}" grid-count="{{6}}"></skeleton>
+    <block wx:else>
+      <assessment-card wx:for="{{list}}" wx:key="id" item="{{item}}" data-id="{{item.id}}" bindtap="onAssessTap"></assessment-card>
+      <view class="empty" wx:if="{{list.length === 0}}">
+        <view class="empty-emoji">🔍</view>
+        <view class="empty-text">该分类下暂无测评</view>
+      </view>
+    </block>
+  </view>
+</view>

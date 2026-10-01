@@ -1,0 +1,112 @@
+<!-- pages/index/index.wxml - 首页（植物编辑风 · Botanical Editorial） -->
+<view class="home">
+
+  <!-- 背景装饰：阳光斑驳的 mesh 渐变层 -->
+  <view class="bg-mesh"></view>
+  <view class="bg-grain"></view>
+
+  <!-- 模块1：顶部用户区 -->
+  <view class="top-bar anim-up" style="animation-delay: 0ms">
+    <view class="user-zone" bindtap="goLogin">
+      <view class="user-avatar">
+        <view class="avatar-ring"></view>
+        <image wx:if="{{avatar}}" class="avatar-img" src="{{avatar}}" mode="aspectFill"></image>
+        <text wx:else class="avatar-emoji">🌿</text>
+      </view>
+      <view class="user-greeting">
+        <view class="greeting-hi">你好，<text class="greeting-name">{{nickName || '常青藤同学'}}</text></view>
+        <view class="greeting-row">
+          <text class="greeting-sub">今天来测测你的方向吧</text>
+          <view class="study-tag" bindtap="goCheckIn">🔥 已连续打卡 {{studyDays}} 天</view>
+        </view>
+      </view>
+    </view>
+    <view class="notice-btn" bindtap="goNotice">
+      <text class="notice-icon">🔔</text>
+      <view class="notice-dot" wx:if="{{hasNotice}}"></view>
+    </view>
+  </view>
+
+  <!-- 模块2：Banner 轮播 -->
+  <swiper class="banner-swiper anim-up" style="animation-delay: 80ms"
+          indicator-dots circular autoplay interval="4500"
+          indicator-color="rgba(255,255,255,0.35)" indicator-active-color="#FFFFFF">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <view class="banner-card" style="background:{{item.bg}}" data-id="{{item.id}}" bindtap="onBannerTap">
+        <!-- 有机曲线装饰 -->
+        <view class="banner-curve-1"></view>
+        <view class="banner-curve-2"></view>
+        <view class="banner-curve-3"></view>
+        <!-- 大号 emoji 装饰 -->
+        <view class="banner-emoji">{{item.emoji}}</view>
+        <view class="banner-content">
+          <view class="banner-title">{{item.title}}</view>
+          <view class="banner-highlight">{{item.highlight}}</view>
+          <view class="banner-sub">{{item.sub}}</view>
+          <view class="banner-btn">
+            <text>{{item.btn}}</text>
+            <text class="banner-btn-arrow">→</text>
+          </view>
+        </view>
+        <!-- 玻璃拟态装饰条 -->
+        <view class="banner-glow"></view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 氛围条：今日实时数据 -->
+  <view class="vibe-bar anim-up" style="animation-delay: 120ms">
+    <view class="vibe-dot"></view>
+    <text class="vibe-text">今日已有 <text class="vibe-num">{{todayAssessCount}}</text> 位同学完成测评</text>
+  </view>
+
+  <!-- 学习打卡卡片 -->
+  <view class="checkin-card anim-up" style="animation-delay: 140ms" bindtap="goCheckIn">
+    <view class="checkin-left">
+      <view class="checkin-title">📅 今日学习打卡</view>
+      <view class="checkin-sub">连续打卡7天解锁专属徽章</view>
+    </view>
+    <view class="checkin-btn">去打卡 →</view>
+    <view class="checkin-deco"></view>
+  </view>
+  <!-- 模块3：核心数据看板（英雄区 - 超大数字） -->
+  <view class="stats-section anim-up" style="animation-delay: 160ms">
+    <view class="stats-header">
+      <view class="stats-title">数据见证</view>
+      <view class="stats-line"></view>
+    </view>
+    <view class="stats-board">
+      <view class="stat-card" wx:for="{{stats}}" wx:key="label">
+        <view class="stat-icon">{{item.icon}}</view>
+        <view class="stat-num">{{item.num}}</view>
+        <view class="stat-label">{{item.label}}</view>
+        <view class="stat-trend">{{item.trend}}</view>
+        <view class="stat-shine"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 模块4：四大分类入口（2x2 等大网格） -->
+  <view class="category-section anim-up" style="animation-delay: 240ms">
+    <view class="cat-header">
+      <view class="cat-title">测评分类</view>
+      <view class="cat-sub">找到属于你的方向</view>
+    </view>
+    <view class="category-grid">
+      <view class="cat-card"
+            wx:for="{{categories}}" wx:key="key"
+            data-cat="{{item.key}}" bindtap="goCategory"
+            style="background:{{item.gradient}}">
+        <view class="cat-card-deco"></view>
+        <view class="cat-card-icon">{{item.icon}}</view>
+        <view class="cat-card-name">{{item.name}}</view>
+        <view class="cat-card-desc">{{item.desc}}</view>
+        <view class="cat-card-count">{{item.count}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部留白 -->
+  <view class="bottom-spacer"></view>
+
+</view>

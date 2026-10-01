@@ -1,0 +1,72 @@
+/* pages/user/records.wxss - 测评记录 */
+
+.records-page {
+  padding: 24rpx;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.record-list {
+  margin-top: 4rpx;
+}
+
+.record-card {
+  padding: 28rpx;
+}
+
+.record-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.record-name {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2C3E2D;
+  margin-right: 16rpx;
+}
+
+.record-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.record-time {
+  font-size: 24rpx;
+  color: #9AAAA0;
+}
+
+.record-hint {
+  font-size: 22rpx;
+  color: #B8C5BC;
+}
+
+.tip-bottom {
+  text-align: center;
+  font-size: 24rpx;
+  color: #B8C5BC;
+  padding: 24rpx 0;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 120rpx 40rpx;
+}
+.empty-emoji {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: #7A8A7C;
+  margin-bottom: 40rpx;
+}
+.empty-btn {
+  width: 60%;
+  margin: 0 auto;
+}

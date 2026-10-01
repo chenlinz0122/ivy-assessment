@@ -1,0 +1,9 @@
+{
+  "name": "get-admin-user-list",
+  "version": "1.0.0",
+  "description": "管理后台专用：拉取用户列表（openid 白名单鉴权）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

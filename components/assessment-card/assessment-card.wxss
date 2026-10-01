@@ -1,0 +1,82 @@
+/* components/assessment-card/assessment-card.wxss */
+.assess-card {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(46, 139, 87, 0.07);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.assess-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 3rpx 10rpx rgba(46, 139, 87, 0.10);
+}
+
+.card-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.icon-emoji {
+  font-size: 48rpx;
+}
+
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+  margin-bottom: 8rpx;
+}
+
+.card-desc {
+  font-size: 24rpx;
+  color: #7A8A7C;
+  margin-bottom: 14rpx;
+  line-height: 1.5;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+}
+.meta-item {
+  font-size: 22rpx;
+  color: #9AAAA0;
+  display: flex;
+  align-items: center;
+}
+.meta-icon {
+  font-size: 20rpx;
+  margin-right: 4rpx;
+}
+.meta-divider {
+  margin: 0 14rpx;
+  color: #DDE4DF;
+  font-size: 22rpx;
+}
+
+.card-arrow {
+  width: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8rpx;
+}
+.arrow-text {
+  color: #C8D3CC;
+  font-size: 40rpx;
+  font-weight: 300;
+}

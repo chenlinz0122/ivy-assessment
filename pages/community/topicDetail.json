@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "话题详情",
+  "navigationBarBackgroundColor": "#2E7D32",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "rich-text": "/components/rich-text/rich-text"
+  }
+}

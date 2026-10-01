@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "社区",
+  "usingComponents": {
+    "skeleton": "/components/skeleton/skeleton"
+  }
+}

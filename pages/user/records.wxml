@@ -1,0 +1,44 @@
+<!-- pages/user/records.wxml - 测评记录 -->
+<view class="records-page">
+
+  <!-- 未登录 -->
+  <block wx:if="{{!isLoggedIn}}">
+    <view class="empty">
+      <view class="empty-emoji">🔒</view>
+      <view class="empty-text">请先登录后查看测评记录</view>
+      <button class="btn-outline empty-btn" bindtap="goLogin">去登录</button>
+    </view>
+  </block>
+
+  <!-- 有记录 -->
+  <block wx:elif="{{records.length > 0}}">
+    <view class="record-list">
+      <view class="card record-card"
+            wx:for="{{records}}"
+            wx:key="_id"
+            data-id="{{item._id}}"
+            bindtap="openRecord"
+            bindlongpress="onLongPress">
+        <view class="record-top">
+          <text class="record-name ellipsis">{{item.assessName}}</text>
+          <text class="tag">{{item.typeLabel}}</text>
+        </view>
+        <view class="record-bottom">
+          <text class="record-time">⏰ {{item.time}}</text>
+          <text class="record-hint">点击查看报告 · 长按删除</text>
+        </view>
+      </view>
+    </view>
+    <view class="tip-bottom">共 {{records.length}} 条记录</view>
+  </block>
+
+  <!-- 空状态 -->
+  <block wx:else>
+    <view class="empty">
+      <view class="empty-emoji">📋</view>
+      <view class="empty-text">还没有测评记录，快去测一个吧</view>
+      <button class="btn-primary empty-btn" bindtap="goAssess">去测评</button>
+    </view>
+  </block>
+
+</view>

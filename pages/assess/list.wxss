@@ -1,0 +1,60 @@
+/* pages/assess/list.wxss */
+.list-page { padding: 0 24rpx 60rpx; }
+
+/* 页面标题 */
+.page-head {
+  padding: 32rpx 4rpx 16rpx;
+}
+.page-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+}
+.page-sub {
+  font-size: 24rpx;
+  color: #7A8A7C;
+  margin-top: 8rpx;
+}
+
+/* 分类标签栏 */
+.cat-bar {
+  white-space: nowrap;
+  padding: 16rpx 0 24rpx;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #F5F7F6;
+}
+.cat-item {
+  display: inline-block;
+  padding: 14rpx 32rpx;
+  margin-right: 16rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #5A6B5D;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 8rpx rgba(46, 139, 87, 0.05);
+  transition: all 0.2s ease;
+}
+.cat-item.active {
+  background: linear-gradient(135deg, #3CB371, #2E8B57);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 6rpx 16rpx rgba(46, 139, 87, 0.25);
+}
+
+.list-body { padding-top: 8rpx; }
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 120rpx 0;
+}
+.empty-emoji {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: #B8C5BC;
+}

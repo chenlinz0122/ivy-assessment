@@ -1,0 +1,114 @@
+/* pages/assess/answer.wxss */
+.answer-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 顶部 */
+.answer-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+.back-btn {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  background: #FFFFFF;
+  border-radius: 50%;
+  color: #7A8A7C;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.progress-area { flex: 1; }
+
+/* 题目区 */
+.question-area {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(46, 139, 87, 0.08);
+}
+.question-area.slide-left { animation: slideInLeft 0.3s ease; }
+.question-area.slide-right { animation: slideInRight 0.3s ease; }
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(40rpx); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-40rpx); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.q-index {
+  font-size: 24rpx;
+  color: #2E8B57;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+.q-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+  line-height: 1.6;
+  margin-bottom: 40rpx;
+}
+
+/* 选项 */
+.options { display: flex; flex-direction: column; gap: 20rpx; }
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  background: #F5F7F6;
+  border-radius: 16rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.2s;
+}
+.option-item.selected {
+  background: #E8F5EC;
+  border-color: #2E8B57;
+}
+.option-letter {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  background: #FFFFFF;
+  border-radius: 50%;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #5A6B5D;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.option-item.selected .option-letter {
+  background: #2E8B57;
+  color: #FFFFFF;
+}
+.option-text {
+  flex: 1;
+  font-size: 30rpx;
+  color: #2C3E2D;
+}
+.option-check {
+  color: #2E8B57;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+/* 底部 */
+.answer-bottom {
+  display: flex;
+  padding: 24rpx 0;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  gap: 20rpx;
+}
+.prev-btn { flex: 1; }
+.next-btn { flex: 2; }

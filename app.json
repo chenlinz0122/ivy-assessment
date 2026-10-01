@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/assess/list",
+    "pages/assess/detail",
+    "pages/assess/answer",
+    "pages/assess/result",
+    "pages/user/index",
+    "pages/user/records",
+    "pages/user/badges",
+    "pages/user/archive",
+    "pages/login/index",
+    "pages/community/index",
+    "pages/community/topic",
+    "pages/community/topicDetail",
+    "pages/community/reportDetail",
+    "pages/checkin/calendar",
+    "pages/admin/index",
+    "pages/privacy/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2E8B57",
+    "navigationBarTitleText": "常青藤在线测评",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F7F6"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2E8B57",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/community/index",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "__usePrivacyCheck__": true,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

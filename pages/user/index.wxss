@@ -1,0 +1,347 @@
+/* pages/user/index.wxss - 个人中心 */
+
+.user-page {
+  padding: 24rpx;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+/* 未登录引导 */
+.login-prompt {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  margin-top: 40rpx;
+}
+.login-emoji {
+  font-size: 100rpx;
+  margin-bottom: 24rpx;
+}
+.login-tip {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+  margin-bottom: 12rpx;
+}
+.login-sub {
+  font-size: 26rpx;
+  color: #7A8A7C;
+  margin-bottom: 40rpx;
+}
+.login-go {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* 用户头部 */
+.user-header {
+  position: relative;
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  box-shadow: 0 10rpx 28rpx rgba(46, 139, 87, 0.18);
+}
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #2E8B57 0%, #1F6E42 100%);
+}
+.header-bg::before {
+  content: '';
+  position: absolute;
+  top: -60rpx;
+  right: -40rpx;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.10);
+}
+.header-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -50rpx;
+  right: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+.header-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 40rpx 32rpx;
+}
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  min-height: 120rpx;          /* 防拉高成椭圆 */
+  max-width: 120rpx;
+  border-radius: 50%;          /* 百分比圆角，保证永远正圆 */
+  background: rgba(255, 255, 255, 0.25);
+  border: 4rpx solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  color: #FFFFFF;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.avatar-img {
+  width: 112rpx;               /* 减去 4rpx 边框 ×2，圆与外沿重合 */
+  height: 112rpx;
+  border-radius: 50%;
+  display: block;
+}
+.user-info {
+  flex: 1;
+  margin-left: 24rpx;
+  overflow: hidden;
+}
+.nick {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 14rpx;
+}
+.user-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+.user-tags .tag {
+  margin-bottom: 6rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+.user-tags .tag.combo {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+.edit-btn {
+  font-size: 32rpx;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.2);
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* 统计行 */
+.stats-row {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 16rpx;
+}
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+.stat-item:active { opacity: 0.7; }
+.stat-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #2E8B57;
+  margin-bottom: 8rpx;
+}
+.stat-num.level-icon { font-size: 48rpx; }
+.stat-label {
+  font-size: 24rpx;
+  color: #7A8A7C;
+}
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: #E8EDE9;
+}
+
+/* 菜单列表 */
+.menu-list {
+  padding: 8rpx 0;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  height: 108rpx;
+  padding: 0 28rpx;
+  border-bottom: 1rpx solid #F0F4F1;
+  transition: background 0.15s;
+}
+.menu-item:active { background: #F8FAF9; }
+.menu-item:last-child {
+  border-bottom: none;
+}
+.menu-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.bg-blue   { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+.bg-gold   { background: linear-gradient(135deg, #FFF8E1, #FFECB3); }
+.bg-green  { background: linear-gradient(135deg, #E8F5EC, #C8E6D0); }
+.bg-orange { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+.bg-purple { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); }
+.menu-text {
+  flex: 1;
+  font-size: 30rpx;
+  color: #2C3E2D;
+}
+.menu-badge {
+  font-size: 22rpx;
+  color: #FFFFFF;
+  background: #E74C3C;
+  padding: 2rpx 14rpx;
+  border-radius: 16rpx;
+  margin-right: 12rpx;
+}
+.menu-tag-new {
+  font-size: 18rpx;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #3CB371, #2E8B57);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  margin-right: 12rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+.menu-arrow {
+  font-size: 36rpx;
+  color: #C8D3CC;
+  font-weight: 300;
+}
+
+/* 退出登录 */
+.logout-wrap {
+  padding: 24rpx 0 60rpx;
+}
+.logout-btn {
+  color: #E74C3C;
+  border-color: #E74C3C;
+}
+
+/* 编辑资料弹层 */
+.modal-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48rpx;
+}
+.modal-box {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 40rpx 32rpx;
+}
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #2C3E2D;
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+.form-group {
+  margin-bottom: 28rpx;
+}
+.form-label {
+  display: block;
+  font-size: 26rpx;
+  color: #5A6B5D;
+  margin-bottom: 12rpx;
+}
+.form-input {
+  height: 84rpx;
+  background: #F5F7F6;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  border: 2rpx solid #E8EDE9;
+}
+.form-picker {
+  height: 84rpx;
+  line-height: 84rpx;
+  background: #F5F7F6;
+  border-radius: 16rpx;
+  border: 2rpx solid #E8EDE9;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #2C3E2D;
+}
+.picker-arrow {
+  color: #9AAAA0;
+}
+.modal-actions {
+  display: flex;
+  margin-top: 16rpx;
+}
+.modal-btn {
+  flex: 1;
+  margin: 0 12rpx;
+}
+
+/* 注销账号按钮（危险操作，红色描边） */
+.danger-btn {
+  color: #E53935;
+  border: 1rpx solid #E53935;
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}
+
+/* 编辑弹层提示文字 */
+.form-tip {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+/* 编辑资料弹层：头像选择按钮（官方 chooseAvatar 能力） */
+.avatar-btn {
+  width: 160rpx !important;
+  height: 160rpx;
+  min-height: 160rpx;          /* 覆盖 button 默认 min-height，防拉高成椭圆 */
+  max-width: 160rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 0;
+  margin: 16rpx auto 0;
+  background: #F5F7F6;
+  border: 4rpx dashed #B8C5BC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.avatar-btn::after { border: none; }
+
+/* 编辑弹层头像按钮内的图片：与按钮同尺寸（减去 4rpx 边框 ×2） */
+.avatar-btn .avatar-img {
+  width: 152rpx;
+  height: 152rpx;
+  border-radius: 50%;
+  display: block;
+}
+
+/* 菜单项高亮（成长档案入口，NEW 标识） */
+.menu-item-new {
+  background: linear-gradient(90deg, rgba(46, 139, 87, 0.08), rgba(46, 139, 87, 0));
+}

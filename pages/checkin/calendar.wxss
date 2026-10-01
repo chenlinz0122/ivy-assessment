@@ -1,0 +1,259 @@
+/* pages/checkin/calendar.wxss - 学习打卡日历页（绿色主题） */
+.calendar-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #E8F0E5 0%, #F5F7F6 320rpx, #F5F7F6 100%);
+  padding: 24rpx 32rpx 60rpx;
+  box-sizing: border-box;
+}
+
+/* ===== 顶部统计卡片 ===== */
+.stats-hero {
+  position: relative;
+  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #388E3C 100%);
+  border-radius: 24rpx;
+  padding: 36rpx 28rpx 28rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 12rpx 28rpx rgba(13, 59, 26, 0.25);
+}
+.hero-deco {
+  position: absolute;
+  top: -60rpx;
+  right: -60rpx;
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+.hero-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.hero-item {
+  flex: 1;
+  text-align: center;
+}
+.hero-num {
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: -1rpx;
+}
+.hero-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 8rpx;
+  letter-spacing: 1rpx;
+}
+.hero-divider {
+  width: 1rpx;
+  height: 72rpx;
+  background: rgba(255, 255, 255, 0.18);
+}
+.hero-tip {
+  position: relative;
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 24rpx;
+  letter-spacing: 0.5rpx;
+}
+.hero-tip.done {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ===== 日历卡片 ===== */
+.cal-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 28rpx 24rpx 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(46, 125, 50, 0.08);
+}
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.cal-arrow {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  color: #2E7D32;
+  font-weight: 300;
+  line-height: 1;
+}
+.cal-arrow:active {
+  opacity: 0.6;
+}
+.cal-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1B5E20;
+  letter-spacing: 1rpx;
+}
+
+/* 星期表头 */
+.cal-weekdays {
+  display: flex;
+  margin-bottom: 12rpx;
+}
+.wd {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: #8A9A8C;
+  font-weight: 600;
+  padding: 8rpx 0;
+}
+
+/* 日期网格 */
+.cal-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cal-cell {
+  position: relative;
+  width: calc(100% / 7);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+  box-sizing: border-box;
+}
+.cal-cell.empty {
+  visibility: hidden;
+}
+.cell-day {
+  font-size: 28rpx;
+  color: #2C3E2D;
+  font-weight: 500;
+}
+.cell-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #43A047;
+  margin-top: 4rpx;
+}
+
+/* 已打卡：高亮绿色背景 */
+.cal-cell.checked {
+  background: linear-gradient(135deg, #2E7D32, #43A047);
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 10rpx rgba(46, 125, 50, 0.3);
+}
+.cal-cell.checked .cell-day {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.cal-cell.checked .cell-dot {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* 今天：橙色描边 */
+.cal-cell.today {
+  border: 2rpx solid #E65100;
+  border-radius: 16rpx;
+}
+.cal-cell.today .cell-day {
+  color: #E65100;
+  font-weight: 700;
+}
+.cal-cell.today.checked {
+  border-color: #FFFFFF;
+}
+
+/* 未来日期：置灰 */
+.cal-cell.future {
+  opacity: 0.4;
+}
+
+/* 图例 */
+.cal-legend {
+  display: flex;
+  justify-content: center;
+  gap: 32rpx;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #E8EDE9;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 21rpx;
+  color: #8A9A8C;
+}
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+.legend-dot.checked { background: #2E7D32; }
+.legend-dot.today { background: transparent; border: 2rpx solid #E65100; }
+.legend-dot.normal { background: #E0E0E0; }
+
+/* ===== 操作按钮 ===== */
+.action-bar {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  border: none;
+  letter-spacing: 1rpx;
+  margin: 0;
+  padding: 0;
+}
+.action-btn::after { border: none; }
+.action-btn.primary {
+  background: linear-gradient(135deg, #2E7D32, #43A047);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 20rpx rgba(46, 125, 50, 0.25);
+}
+.action-btn.primary[disabled] {
+  background: #C8E6C9;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+.action-btn.outline {
+  background: #FFFFFF;
+  color: #2E7D32;
+  border: 2rpx solid #2E7D32;
+}
+
+/* ===== 打卡说明 ===== */
+.tips-card {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20rpx;
+  padding: 24rpx 28rpx;
+  border: 1rpx solid rgba(46, 125, 50, 0.1);
+}
+.tips-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #1B5E20;
+  margin-bottom: 12rpx;
+}
+.tips-line {
+  font-size: 22rpx;
+  color: #6B7D6E;
+  line-height: 1.8;
+}

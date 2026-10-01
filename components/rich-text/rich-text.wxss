@@ -1,0 +1,56 @@
+/* components/rich-text/rich-text.wxss - 轻量富文本默认样式 */
+.rich-text {
+  font-size: 28rpx;
+  color: #2C3E2D;
+  line-height: 1.7;
+}
+.rich-text view,
+.rich-text text {
+  display: inline;
+}
+.rich-text view {
+  display: block;
+}
+.rich-text .rt-paragraph {
+  margin-bottom: 16rpx;
+}
+.rich-text .rt-bold {
+  font-weight: bold;
+}
+.rich-text .rt-italic {
+  font-style: italic;
+}
+.rich-text .rt-underline {
+  text-decoration: underline;
+}
+.rich-text .rt-link {
+  color: #2E8B57;
+  text-decoration: underline;
+}
+.rich-text .rt-image {
+  width: 100%;
+  margin: 20rpx 0;
+  border-radius: 16rpx;
+}
+.rich-text .rt-list {
+  margin: 16rpx 0;
+  padding-left: 40rpx;
+}
+.rich-text .rt-list-item {
+  margin-bottom: 10rpx;
+}
+.rich-text .rt-title-h1 {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 30rpx 0 16rpx;
+}
+.rich-text .rt-title-h2 {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 24rpx 0 12rpx;
+}
+.rich-text .rt-title-h3 {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin: 20rpx 0 10rpx;
+}

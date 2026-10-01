@@ -1,0 +1,10 @@
+<!-- components/progress-bar/progress-bar.wxml -->
+<view class="progress-wrap">
+  <view class="progress-info">
+    <text class="progress-text">{{current}}/{{total}}</text>
+    <text class="progress-percent">{{percent}}%</text>
+  </view>
+  <view class="progress-track">
+    <view class="progress-fill" style="width:{{percent}}%"></view>
+  </view>
+</view>

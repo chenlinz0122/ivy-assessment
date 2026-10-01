@@ -1,0 +1,80 @@
+/* pages/assess/detail.wxss */
+.detail-page { padding-bottom: 160rpx; }
+
+/* 头部 */
+.detail-header {
+  padding: 60rpx 40rpx;
+  text-align: center;
+  color: #FFFFFF;
+  border-radius: 0 0 32rpx 32rpx;
+}
+.header-icon { font-size: 100rpx; margin-bottom: 16rpx; }
+.header-name { font-size: 40rpx; font-weight: 700; margin-bottom: 12rpx; }
+.header-cat {
+  display: inline-block;
+  padding: 6rpx 20rpx;
+  background: rgba(255,255,255,0.25);
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  margin-bottom: 24rpx;
+}
+.header-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.header-meta text {
+  font-size: 24rpx;
+  margin: 0 16rpx;
+  opacity: 0.9;
+}
+
+.detail-page .card { margin: 24rpx; }
+.desc-text {
+  font-size: 28rpx;
+  color: #5A6B5D;
+  line-height: 1.8;
+}
+
+/* 报告项 */
+.report-list { padding: 8rpx 0; }
+.report-item {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #2C3E2D;
+  margin-bottom: 20rpx;
+}
+.check {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background: #E8F5EC;
+  color: #2E8B57;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #7A8A7C;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+/* 底部按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 40rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 16rpx rgba(0,0,0,0.06);
+  z-index: 100;
+}
+.bottom-bar .btn-primary { width: 100%; }

@@ -1,0 +1,40 @@
+<!-- pages/assess/answer.wxml -->
+<view class="answer-page" wx:if="{{assess}}">
+  <!-- 顶部进度 -->
+  <view class="answer-top">
+    <view class="back-btn" bindtap="onBack">✕</view>
+    <view class="progress-area">
+      <progress-bar current="{{currentIdx + 1}}" total="{{total}}"></progress-bar>
+    </view>
+  </view>
+
+  <!-- 题目区域 -->
+  <view class="question-area {{animClass}}">
+    <view class="q-index">第 {{currentIdx + 1}} 题 / 共 {{total}} 题</view>
+    <view class="q-title">{{questions[currentIdx].title}}</view>
+
+    <view class="options">
+      <view
+        class="option-item {{selected === idx ? 'selected' : ''}}"
+        wx:for="{{questions[currentIdx].options}}"
+        wx:key="index"
+        wx:for-index="idx"
+        wx:for-item="opt"
+        data-idx="{{idx}}"
+        bindtap="selectOption"
+      >
+        <view class="option-letter">{{['A','B','C','D','E'][idx]}}</view>
+        <view class="option-text">{{opt.text}}</view>
+        <view class="option-check" wx:if="{{selected === idx}}">✓</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="answer-bottom">
+    <button class="btn-outline prev-btn" bindtap="prev" disabled="{{currentIdx === 0}}">上一题</button>
+    <button class="btn-primary next-btn" bindtap="next">
+      {{currentIdx === total - 1 ? '完成并查看报告' : '下一题'}}
+    </button>
+  </view>
+</view>

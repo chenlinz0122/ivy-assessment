@@ -1,0 +1,91 @@
+/* components/skeleton/skeleton.wxss - 骨架屏占位动画 */
+.sk-wrap {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 14rpx rgba(46,139,87,0.06);
+}
+
+.sk-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.sk-header {
+  padding: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.sk-block-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #E8EDE9;
+  animation: shimmer 1.4s infinite;
+}
+
+.sk-blocks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.sk-block-title {
+  height: 34rpx;
+  border-radius: 8rpx;
+  background: #E8EDE9;
+  animation: shimmer 1.4s infinite;
+}
+
+.sk-block-sub {
+  height: 24rpx;
+  border-radius: 8rpx;
+  background: #E8EDE9;
+  animation: shimmer 1.4s infinite;
+}
+
+.sk-body {
+  padding: 0 24rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.sk-block-line {
+  height: 24rpx;
+  border-radius: 8rpx;
+  background: #EDF1EF;
+  animation: shimmer 1.4s infinite;
+}
+
+.sk-block-para {
+  height: 24rpx;
+  border-radius: 8rpx;
+  background: #EDF1EF;
+  animation: shimmer 1.4s infinite;
+}
+
+.sk-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24rpx;
+  gap: 16rpx;
+}
+
+.sk-block-grid {
+  width: calc(50% - 8rpx);
+  aspect-ratio: 1 / 1;
+  border-radius: 16rpx;
+  background: #EDF1EF;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.45; }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.45; }
+}

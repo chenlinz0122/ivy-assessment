@@ -1,0 +1,2 @@
+<!-- components/rich-text/rich-text.wxml - 富文本渲染（基于原生 rich-text） -->
+<rich-text class="rich-text" nodes="{{nodes}}"></rich-text>

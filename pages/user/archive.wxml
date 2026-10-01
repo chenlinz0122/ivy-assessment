@@ -1,0 +1,107 @@
+<!-- pages/user/archive.wxml - 我的成长档案 -->
+<view class="archive-page">
+
+  <!-- 未登录 -->
+  <block wx:if="{{!isLoggedIn}}">
+    <view class="empty">
+      <view class="empty-emoji">🔒</view>
+      <view class="empty-text">请先登录后查看成长档案</view>
+      <button class="btn-outline empty-btn" bindtap="goAssess">去测评</button>
+    </view>
+  </block>
+
+  <!-- 已登录：有记录 -->
+  <block wx:elif="{{totalCount > 0}}">
+
+    <!-- 档案头部 -->
+    <view class="archive-header">
+      <view class="header-deco"></view>
+      <view class="header-title">🌿 我的成长档案</view>
+      <view class="header-sub">{{user.nickName}} · {{user.grade}} · 共完成 {{totalCount}} 次测评</view>
+    </view>
+
+    <!-- 概览统计 -->
+    <view class="card overview-card">
+      <view class="overview-row">
+        <view class="overview-avatar">{{level.icon}}</view>
+        <view class="overview-info">
+          <view class="overview-name">{{user.nickName}}</view>
+          <view class="overview-meta">{{user.grade}} · 选科：{{user.subjectCombo || '未设置'}}</view>
+          <view class="overview-level">{{level.name}}</view>
+        </view>
+      </view>
+      <view class="overview-stats">
+        <view class="ov-stat">
+          <view class="ov-num">{{totalCount}}</view>
+          <view class="ov-label">已完成测评</view>
+        </view>
+        <view class="ov-divider"></view>
+        <view class="ov-stat">
+          <view class="ov-num">{{user.points || 0}}</view>
+          <view class="ov-label">累计积分</view>
+        </view>
+        <view class="ov-divider"></view>
+        <view class="ov-stat">
+          <view class="ov-num">{{badgesUnlocked}}</view>
+          <view class="ov-label">获得徽章</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 按分类汇总 -->
+    <block wx:for="{{groupedSummary}}" wx:key="category" wx:for-item="group">
+      <view class="section-label">
+        <view class="label-bar"></view>{{group.category}}
+      </view>
+      <view class="card summary-card" wx:for="{{group.list}}" wx:key="_id" wx:for-item="item" data-id="{{item._id}}" bindtap="openRecord">
+        <view class="summary-top">
+          <view class="summary-icon">{{item.icon}}</view>
+          <view class="summary-main">
+            <view class="summary-name">{{item.assessName}}</view>
+            <view class="summary-date">{{item.dateStr}}</view>
+          </view>
+          <text class="summary-arrow">›</text>
+        </view>
+        <view class="summary-content">
+          <text class="summary-title">{{item.summary.title}}：</text>
+          <text class="summary-text">{{item.summary.text}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 成长时间轴 -->
+    <view class="section-label">
+      <view class="label-bar"></view>成长时间轴
+    </view>
+    <view class="card timeline-card">
+      <view class="timeline-item" wx:for="{{timeline}}" wx:key="_id" data-id="{{item._id}}" bindtap="openRecord">
+        <view class="tl-dot"></view>
+        <view class="tl-content">
+          <text class="tl-name">{{item.icon}} {{item.assessName}}</text>
+          <text class="tl-time">{{item.dateStr}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 导出按钮 -->
+    <view class="export-wrap">
+      <button class="btn-primary export-btn" bindtap="exportImage">📥 导出成长档案</button>
+      <view class="export-tip">导出后可长按图片保存或分享</view>
+    </view>
+
+  </block>
+
+  <!-- 已登录：无记录 -->
+  <block wx:else>
+    <view class="empty">
+      <view class="empty-emoji">📈</view>
+      <view class="empty-text">还没有测评记录</view>
+      <view class="empty-sub">完成测评后，这里会生成你的专属成长档案</view>
+      <button class="btn-primary empty-btn" bindtap="goAssess">去测评</button>
+    </view>
+  </block>
+
+  <!-- 用于导出图片的 canvas（隐藏） -->
+  <canvas type="2d" id="archiveCanvas" class="archive-canvas" style="{{canvasStyle}}"></canvas>
+
+</view>

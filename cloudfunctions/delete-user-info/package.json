@@ -1,0 +1,9 @@
+{
+  "name": "delete-user-info",
+  "version": "1.0.0",
+  "description": "注销账号：按 openid 删除 users/records/points 中的个人数据",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

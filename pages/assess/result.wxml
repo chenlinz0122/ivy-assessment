@@ -1,0 +1,70 @@
+<!-- pages/assess/result.wxml - 测评结果页（报告展示）- 增强版 -->
+<view class="result-page" wx:if="{{record}}">
+  <!-- 报告头部 -->
+  <view class="result-header" style="background:linear-gradient(135deg, {{assess.color || '#2E8B57'}}CC, {{assess.color || '#2E8B57'}})">
+    <view class="rh-icon">{{assess.icon || '📊'}}</view>
+    <view class="rh-name">{{record.assessName}}</view>
+    <view class="rh-sub">测评报告</view>
+    <view class="rh-code" wx:if="{{report.code}}">兴趣代码：{{report.code}}</view>
+    <view class="rh-code" wx:if="{{report.type}}">人格类型：{{report.type}}</view>
+    <view class="rh-code" wx:if="{{report.styleName}}">学习风格：{{report.styleName}}</view>
+    <view class="rh-code" wx:if="{{report.level}}">{{report.level}}</view>
+  </view>
+
+  <!-- 图表区 -->
+  <block wx:if="{{report.charts}}">
+    <result-chart wx:for="{{report.charts}}" wx:key="title" chart="{{item}}"></result-chart>
+    <!-- 新增：柱状图、雷达图、饼图等扩展图表类型 -->
+    <block wx:if="{{report.extraCharts}}">
+      <view class="extra-charts">
+        <result-chart wx:for="{{report.extraCharts}}" wx:key="title" chart="{{item}}"></result-chart>
+      </view>
+    </block>
+  </block>
+
+  <!-- 文字解读 -->
+  <view class="card" wx:for="{{report.sections}}" wx:key="title" wx:for-item="section">
+    <view class="section-title {{section.type === 'warning' ? 'warn' : ''}}">
+      {{section.type === 'warning' ? '⚠️ ' : ''}}{{section.title}}
+    </view>
+    <view class="section-content {{section.type === 'warning' ? 'warn-content' : ''}}">{{section.content}}</view>
+  </view>
+
+  <!-- 推荐专业TOP5（专业匹配测评专用） -->
+  <view class="card" wx:if="{{report.top5}}">
+    <view class="section-title">推荐专业TOP5</view>
+    <view class="top5-list">
+      <view class="top5-item" wx:for="{{report.top5}}" wx:key="major">
+        <view class="top5-rank">{{index + 1}}</view>
+        <view class="top5-name">{{item.major}}</view>
+        <view class="top5-bar">
+          <view class="top5-fill" style="width:{{item.value * 20}}%"></view>
+        </view>
+        <view class="top5-school" wx:if="{{item.schools && item.schools.length}}">
+          <text class="school-label">参考院校：</text>
+          <text class="school-text">{{item.schools.join('、')}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐专业TOP5（专业匹配测评专用） -->
+  <view class="card" wx:if="{{report.majorMap && report.majorMap.length}}">
+    <view class="section-title">专业方向参考</view>
+    <view class="major-list">
+      <view class="major-item" wx:for="{{report.majorMap}}" wx:key="major">
+        <text class="major-name">{{item.major}}</text>
+        <text class="major-desc">{{item.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作区 -->
+  <view class="actions">
+    <button class="btn-outline action-btn" bindtap="shareReport" open-type="share">📤 分享报告</button>
+    <button class="btn-outline action-btn" bindtap="retry">🔄 再测一次</button>
+  </view>
+  <button class="btn-primary more-btn" bindtap="moreAssess">探索更多测评</button>
+
+  <view class="footer-tip">— 报告已自动保存到"我的记录" —</view>
+</view>

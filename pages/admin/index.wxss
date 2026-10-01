@@ -1,0 +1,135 @@
+/* pages/admin/index.wxss - 管理后台 */
+.admin-page {
+  min-height: 100vh;
+  background: #F5F7F6;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 无权限 */
+.denied-box { text-align: center; padding: 160rpx 60rpx; }
+.denied-icon { font-size: 80rpx; margin-bottom: 24rpx; }
+.denied-title { font-size: 34rpx; font-weight: 700; color: #2C3E2D; margin-bottom: 16rpx; }
+.denied-desc { font-size: 26rpx; color: #8A9A8C; line-height: 1.8; }
+
+/* 搜索栏 */
+.search-bar { display: flex; gap: 16rpx; margin-bottom: 20rpx; }
+.search-input {
+  flex: 1; height: 76rpx; min-height: 76rpx;
+  background: #FFFFFF; border-radius: 38rpx;
+  padding: 0 32rpx; font-size: 28rpx;
+  box-sizing: border-box;
+}
+.search-btn {
+  width: 140rpx; height: 76rpx;
+  background: #2E8B57; color: #FFFFFF;
+  border-radius: 38rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28rpx; font-weight: 600;
+}
+
+/* 筛选 */
+.filter-bar { white-space: nowrap; margin-bottom: 20rpx; }
+.filter-group { display: inline-flex; gap: 12rpx; margin-right: 24rpx; }
+.filter-tag {
+  display: inline-flex; align-items: center;
+  padding: 12rpx 28rpx;
+  background: #FFFFFF; color: #5A6B5D;
+  border-radius: 32rpx; font-size: 24rpx;
+  border: 2rpx solid #E3EAE5;
+  line-height: 1.4;
+}
+.filter-tag-active {
+  background: #E8F5EC; color: #1F6E42;
+  border-color: #2E8B57; font-weight: 600;
+}
+
+/* 统计 + 导出 */
+.stats-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.stats-text { font-size: 24rpx; color: #8A9A8C; }
+.export-btn {
+  padding: 12rpx 28rpx;
+  background: #1F6E42; color: #FFFFFF;
+  border-radius: 32rpx; font-size: 24rpx; font-weight: 600;
+  display: inline-flex; align-items: center;
+  line-height: 1.4;
+}
+
+/* 加载 / 空 */
+.loading-box, .empty-box {
+  text-align: center; color: #8A9A8C; font-size: 26rpx;
+  padding: 120rpx 0;
+}
+
+/* 用户卡片 */
+.user-card {
+  display: flex; align-items: center;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(46, 139, 87, 0.06);
+}
+.user-avatar {
+  width: 96rpx; height: 96rpx;
+  min-height: 96rpx; max-width: 96rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+  overflow: hidden;
+}
+.user-avatar-default {
+  background: #E8F5EC; color: #2E8B57;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36rpx; font-weight: 700;
+}
+.user-info { flex: 1; min-width: 0; }
+.user-name-row { display: flex; align-items: center; gap: 12rpx; margin-bottom: 8rpx; }
+.user-name { font-size: 30rpx; font-weight: 700; color: #2C3E2D; }
+/* 标签统一 line-height，保证文字在胶囊内垂直居中 */
+.user-role {
+  font-size: 20rpx; padding: 4rpx 14rpx;
+  background: #E8F5EC; color: #2E8B57;
+  border-radius: 8rpx;
+  line-height: 1.5;
+  display: inline-flex; align-items: center;
+}
+.user-role.role-parent { background: #FFF4E5; color: #E8890C; }
+.user-grade {
+  font-size: 20rpx; padding: 4rpx 14rpx;
+  background: #EDF3FD; color: #3D6DB5;
+  border-radius: 8rpx;
+  line-height: 1.5;
+  display: inline-flex; align-items: center;
+}
+.user-phone { font-size: 26rpx; color: #5A6B5D; margin-bottom: 6rpx; }
+.user-meta { font-size: 22rpx; color: #9AAB9D; }
+
+/* 封禁态 */
+.user-card-banned { opacity: 0.7; background: #FAF5F5; }
+.user-banned-tag {
+  font-size: 20rpx; padding: 4rpx 14rpx;
+  background: #FDECEA; color: #E53935;
+  border-radius: 8rpx;
+  line-height: 1.5;
+  display: inline-flex; align-items: center;
+}
+.user-ban-reason { font-size: 22rpx; color: #E53935; margin-top: 4rpx; }
+
+/* 管理操作按钮 */
+.user-actions {
+  display: flex; flex-direction: column; gap: 12rpx;
+  flex-shrink: 0; margin-left: 16rpx;
+}
+.action-btn {
+  width: 104rpx; height: 52rpx;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 26rpx; font-size: 22rpx; font-weight: 600;
+  line-height: 1;
+}
+.action-ban { background: #FFF4E5; color: #E8890C; }
+.action-unban { background: #E8F5EC; color: #2E8B57; }
+.action-delete { background: #FDECEA; color: #E53935; }

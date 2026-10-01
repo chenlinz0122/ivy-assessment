@@ -1,0 +1,138 @@
+<!-- pages/community/topic.wxml - 话题讨论独立空间 -->
+<view class="topic-page">
+
+  <!-- 页面头部 -->
+  <view class="page-head">
+    <view class="page-title">话题讨论</view>
+    <view class="page-sub">和同龄人一起聊选科、聊专业、聊高中生活</view>
+  </view>
+
+  <!-- 顶部分类标签（横向滑动） -->
+  <scroll-view class="cat-scroll" scroll-x="true" enhanced="true" show-scrollbar="{{false}}" scroll-with-animation="true">
+    <view class="cat-bar">
+      <view class="cat-chip {{activeCat === item.key ? 'active' : ''}}"
+            wx:for="{{topicCategories}}" wx:key="key"
+            data-cat="{{item.key}}" bindtap="switchCat">
+        {{item.name}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 帖子列表流 -->
+  <view class="post-list">
+    <view class="card topic-post-card" wx:for="{{posts}}" wx:key="_id" data-id="{{item._id}}" bindtap="openPost">
+      <!-- 帖子头部：用户信息 + 话题分类标签 -->
+      <view class="post-head">
+        <view class="post-avatar {{item.anonymous ? 'avatar-anon' : ''}}">
+          <image wx:if="{{item.avatar && !item.anonymous}}" class="avatar-img" src="{{item.avatar}}" mode="aspectFill"></image>
+          <text wx:elif="{{item.anonymous}}">🌿</text>
+          <text wx:else>👤</text>
+        </view>
+        <view class="post-author">
+          <view class="post-nick">{{item.nickName}}</view>
+          <view class="post-time">⏰ {{item.time}}</view>
+        </view>
+        <view class="cat-tag" wx:if="{{item.catTag}}">{{item.catTag}}</view>
+      </view>
+
+      <!-- 帖子正文（最多展示前50字，超出折叠） -->
+      <view class="post-content">
+        <text>{{item.contentShort}}</text>
+        <text class="post-more" wx:if="{{item.hasMore}}">全文</text>
+      </view>
+
+      <!-- 图片缩略图 -->
+      <view class="post-images" wx:if="{{item.images.length}}">
+        <view class="post-img-item"
+              wx:for="{{item.images}}" wx:for-item="img" wx:key="*this"
+              data-urls="{{item.images}}" data-current="{{img}}"
+              catchtap="previewImage">
+          <image src="{{img}}" mode="aspectFill"></image>
+        </view>
+      </view>
+
+      <!-- 帖子底部：点赞 + 评论 -->
+      <view class="post-foot">
+        <view class="foot-btn {{item.liked ? 'liked' : ''}}" data-id="{{item._id}}" catchtap="onLike">
+          <text class="foot-icon">{{item.liked ? '❤️' : '🤍'}}</text>
+          <text>{{item.likes}}</text>
+        </view>
+        <view class="foot-btn">
+          <text class="foot-icon">💬</text>
+          <text>{{item.comments}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{posts.length === 0}}">
+    <view class="empty-emoji">💬</view>
+    <view class="empty-text">该分类下还没有帖子</view>
+    <view class="empty-sub">来发第一个帖子吧</view>
+  </view>
+
+  <view class="tip-bottom" wx:if="{{posts.length}}">— 没有更多了 —</view>
+
+  <!-- 悬浮发帖按钮 -->
+  <view class="fab" bindtap="openComposer">＋</view>
+
+  <!-- 发帖弹层 -->
+  <view class="modal-mask" wx:if="{{showComposer}}" bindtap="closeComposer">
+    <view class="composer-box" catchtap="stopPropagation">
+      <view class="composer-title">发布话题</view>
+
+      <!-- 话题分类选择（必选） -->
+      <view class="compose-cat-label">选择话题分类 <text class="required">*</text></view>
+      <scroll-view class="compose-cat-scroll" scroll-x="true" enhanced="true" show-scrollbar="{{false}}">
+        <view class="compose-cat-bar">
+          <view class="compose-cat-chip {{composeCategory === item.key ? 'active' : ''}}"
+                wx:for="{{topicCategories}}" wx:key="key"
+                wx:if="{{item.key !== 'all'}}"
+                data-cat="{{item.key}}" bindtap="selectComposeCat">
+            {{item.name}}
+          </view>
+        </view>
+      </scroll-view>
+
+      <!-- 文本输入（最多500字） -->
+      <textarea class="composer-input"
+                placeholder="说点什么吧…（选科困惑、学习打卡、树洞倾诉都可以）"
+                maxlength="500"
+                value="{{composeContent}}"
+                bindinput="onComposeInput"></textarea>
+
+      <!-- 图片上传区域（最多3张） -->
+      <view class="compose-images">
+        <view class="compose-img-item" wx:for="{{composeImages}}" wx:key="*this" wx:for-item="img" wx:for-index="idx">
+          <image src="{{img}}" mode="aspectFill" data-idx="{{idx}}" bindtap="previewComposeImage"></image>
+          <view class="compose-img-del" data-idx="{{idx}}" catchtap="removeImage">×</view>
+        </view>
+        <view class="compose-img-add" wx:if="{{composeImages.length < 3}}" bindtap="chooseImage">
+          <text class="add-icon">＋</text>
+          <text class="add-text">{{composeImages.length}}/3</text>
+        </view>
+      </view>
+
+      <!-- 匿名开关 + 字数统计 -->
+      <view class="composer-options">
+        <view class="anon-toggle" bindtap="toggleAnonymous">
+          <view class="toggle-switch {{isAnonymous ? 'on' : ''}}">
+            <view class="toggle-knob"></view>
+          </view>
+          <text class="anon-label">匿名发布</text>
+        </view>
+        <text class="composer-count">{{composeContent.length}}/500</text>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="composer-foot">
+        <view class="composer-actions">
+          <button class="btn-outline composer-btn" bindtap="closeComposer">取消</button>
+          <button class="btn-primary composer-btn" bindtap="submitPost">发布</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

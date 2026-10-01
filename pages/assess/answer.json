@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "答题",
+  "usingComponents": {
+    "progress-bar": "/components/progress-bar/progress-bar"
+  }
+}

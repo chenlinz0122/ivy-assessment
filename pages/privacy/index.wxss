@@ -1,0 +1,39 @@
+/* pages/privacy/index.wxss - 隐私政策全文页 */
+.privacy-page {
+  min-height: 100vh;
+  background: #FFFFFF;
+  padding: 40rpx 40rpx calc(60rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+.pp-title {
+  font-size: 38rpx; font-weight: 700; color: #2C3E2D;
+  text-align: center; margin-bottom: 12rpx;
+}
+.pp-meta {
+  font-size: 22rpx; color: #9AAB9D;
+  text-align: center; margin-bottom: 36rpx;
+  padding-bottom: 28rpx;
+  border-bottom: 2rpx solid #F0F3F1;
+}
+.pp-intro { margin-bottom: 8rpx; }
+.pp-h2 {
+  font-size: 30rpx; font-weight: 700; color: #2C3E2D;
+  margin: 40rpx 0 14rpx;
+}
+.pp-h3 {
+  font-size: 27rpx; font-weight: 600; color: #3D4F3F;
+  margin: 20rpx 0 10rpx;
+}
+.pp-p {
+  font-size: 27rpx; color: #4A5B4D;
+  line-height: 1.95;
+}
+.pp-list {
+  font-size: 27rpx; color: #4A5B4D;
+  line-height: 1.95;
+  margin-top: 12rpx;
+}
+.pp-footer {
+  text-align: center; color: #C5D1C8;
+  font-size: 24rpx; margin-top: 60rpx;
+}
